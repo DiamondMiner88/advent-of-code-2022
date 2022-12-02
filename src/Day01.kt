@@ -1,9 +1,9 @@
 fun main() {
-    part1()
-    part2()
+    d1Part1()
+    d1Part2()
 }
 
-fun part1() {
+fun d1Part1() {
     val input = readInput("input/day01.txt")
     val elves = input.split("\n\n")
         .map { it.split("\n").filter { it != "" } }
@@ -12,7 +12,7 @@ fun part1() {
     println(maxCalories)
 }
 
-fun part2() {
+fun d1Part2() {
     val input = readInput("input/day01.txt")
     val elves = input.split("\n\n")
         .map { it.split("\n").filter { it != "" } }
