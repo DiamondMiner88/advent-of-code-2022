@@ -5,14 +5,14 @@ fun main() {
 
 fun d5part1() {
     val input = readInput("input/day05.txt")
+        .split("\n\n")
 
-    val splits = input.split("\n\n")
-
+    val stackSplits = input[0].split("\n")
+    val stacksCount = stackSplits.last().count { it.isDigit() }
     val stacks = MutableList<MutableList<Char>>(9) { mutableListOf() }
 
-    val stackSplits = splits[0].split("\n")
     for (stack in stackSplits.take(stackSplits.size - 1)) {
-        val indexes = listOf(1, 5, 9, 13, 17, 21, 25, 29, 33)
+        val indexes = (0 until stacksCount).map { 1 + it * 4 }
 
         indexes.mapIndexed { i, index ->
             val char = stack.getOrNull(index)
@@ -26,9 +26,7 @@ fun d5part1() {
     }
 
     val regex = "move (\\d{1,2}) from (\\d) to (\\d)".toRegex()
-    for (inst in splits[1].split("\n").filter { it.isNotBlank() }) {
-        println(stacks)
-        println(inst)
+    for (inst in input[1].split("\n").filter { it.isNotBlank() }) {
         val (_, count, from, to) = regex.find(inst)!!.groupValues
 
         val src = stacks[from.toInt() - 1]
@@ -37,8 +35,6 @@ fun d5part1() {
         val removed = src.takeLast(count.toInt()).reversed()
         for (i in (0 until count.toInt())) src.removeLast()
         dst.addAll(removed.toTypedArray())
-        println(src)
-        println(dst)
     }
 
 
@@ -47,14 +43,14 @@ fun d5part1() {
 
 fun d5part2() {
     val input = readInput("input/day05.txt")
+        .split("\n\n")
 
-    val splits = input.split("\n\n")
-
+    val stackSplits = input[0].split("\n")
+    val stacksCount = stackSplits.last().count { it.isDigit() }
     val stacks = MutableList<MutableList<Char>>(9) { mutableListOf() }
 
-    val stackSplits = splits[0].split("\n")
     for (stack in stackSplits.take(stackSplits.size - 1)) {
-        val indexes = listOf(1, 5, 9, 13, 17, 21, 25, 29, 33)
+        val indexes = (0 until stacksCount).map { 1 + it * 4 }
 
         indexes.mapIndexed { i, index ->
             val char = stack.getOrNull(index)
@@ -68,9 +64,7 @@ fun d5part2() {
     }
 
     val regex = "move (\\d{1,2}) from (\\d) to (\\d)".toRegex()
-    for (inst in splits[1].split("\n").filter { it.isNotBlank() }) {
-        println(stacks)
-        println(inst)
+    for (inst in input[1].split("\n").filter { it.isNotBlank() }) {
         val (_, count, from, to) = regex.find(inst)!!.groupValues
 
         val src = stacks[from.toInt() - 1]
@@ -79,8 +73,6 @@ fun d5part2() {
         val removed = src.takeLast(count.toInt())
         for (i in (0 until count.toInt())) src.removeLast()
         dst.addAll(removed.toTypedArray())
-        println(src)
-        println(dst)
     }
 
 
